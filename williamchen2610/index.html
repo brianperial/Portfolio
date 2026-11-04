@@ -201,6 +201,16 @@ h1 .num,h2 .num{font-size:1.08em}
 .panel .p-head{grid-column:1/-1}
 .panel .p-body{grid-column:1/-1;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:24px 40px;align-items:start}
 .top h1,.panel h2,.ev{font-variant-numeric:lining-nums;font-feature-settings:'lnum' 1,'kern' 1}
+.stk{display:flex;flex-direction:column;gap:12px;padding:14px;border:1px solid var(--line);border-radius:10px;background:var(--bg)}
+.stk-h{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:13px;color:var(--ink2)}
+.stk-h b{font:600 24px var(--f-num);color:var(--ink)}
+.stk-bar{display:flex;height:22px;border-radius:4px;overflow:hidden;gap:2px}
+.stk-bar i{display:block;height:100%;min-width:4px}
+.stk-l{display:flex;flex-direction:column;gap:6px}
+.stk-r{display:grid;grid-template-columns:12px minmax(0,1fr) auto auto;gap:10px;align-items:center;font-size:13px}
+.stk-r s{width:12px;height:12px;border-radius:3px;display:block}
+.stk-r .a{font:600 13px var(--f-num);text-align:right}
+.stk-r .p{font:500 12px var(--f-num);color:var(--ink2);text-align:right;min-width:48px}
 </style>
 
 <div class="wrap">
@@ -309,7 +319,7 @@ liuxu:{
     full:true,
     old:{r:[0,0,2576,1316],hl:[{b:[330,316,522,402],tag:'期初现金'},{b:[2027,16,2333,46],tag:'日期'}]},
     now:{r:[0,0,2000,1047],hl:[{b:[258,244,408,316],tag:'期末现金'},{b:[1568,10,1810,36],tag:'日期'}]},
-    blocks:[ba('现金',1712877.89,2963253.65),
+    blocks:[{t:'stack',l:'期末现金',total:2963253.65,parts:[{l:'期初现金',v:1712877.89,c:'#CFC6AE'},{l:'非期权现金净流入',v:1250190+35.26-142582,c:'#B98A1E'},{l:'预收的期权现金',v:27450,c:'#8E909A'},{l:'已确认现金收益',v:(2963253.65-1712877.89-(1250190+35.26-142582)-27450),c:'#2F7D50'}]},
       tbl(null,[
         ['10/06 入金',1250190],
         ['利息收入',35.26],
@@ -455,6 +465,10 @@ function renderBlock(b){
      +'<div class="ba-row"><span class="ba-k">期初</span><div class="ba-t"><i class="o" style="width:'+(b.o/mx*100)+'%"></i></div><span class="ba-v">'+money(b.o)+'</span></div>'
      +'<div class="ba-row"><span class="ba-k">期末</span><div class="ba-t"><i class="n" style="width:'+(b.n/mx*100)+'%"></i></div><span class="ba-v"><b>'+money(b.n)+'</b></span></div>'
      +'<div class="ba-d '+cls(d)+'"><span>'+sgn(d)+'</span><small>'+pctS(b.o,b.n)+'</small></div></div>'}
+  if(b.t==='stack'){
+    const bar=b.parts.map(x=>'<i style="background:'+x.c+';flex:'+x.v+' 0 0"></i>').join('');
+    const rows=b.parts.map(x=>'<div class="stk-r"><s style="background:'+x.c+'"></s><span>'+x.l+'</span><span class="a">'+money(x.v)+'</span><span class="p">'+(x.v/b.total*100).toFixed(1)+'%</span></div>').join('');
+    return '<div class="stk"><div class="stk-h"><span>'+b.l+'</span><b>'+money(b.total)+'</b></div><div class="stk-bar">'+bar+'</div><div class="stk-l">'+rows+'</div></div>'}
   if(b.t==='note')return '<p class="note">'+b.text+'</p>';
   return ''}
 
