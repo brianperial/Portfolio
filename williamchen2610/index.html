@@ -207,7 +207,7 @@ h1 .num,h2 .num{font-size:1.08em}
 .stk-bar{display:flex;height:22px;border-radius:4px;overflow:hidden;gap:2px}
 .stk-bar i{display:block;height:100%;min-width:4px}
 .stk-l{display:flex;flex-direction:column;gap:6px}
-.stk-r{display:grid;grid-template-columns:12px minmax(0,1fr) auto auto;gap:10px;align-items:center;font-size:13px}
+.stk-r{display:grid;grid-template-columns:12px minmax(0,1fr) auto;gap:10px;align-items:center;font-size:13px}
 .stk-r s{width:12px;height:12px;border-radius:3px;display:block}
 .stk-r .a{font:600 13px var(--f-num);text-align:right}
 .stk-r .p{font:500 12px var(--f-num);color:var(--ink2);text-align:right;min-width:48px}
@@ -467,7 +467,7 @@ function renderBlock(b){
      +'<div class="ba-d '+cls(d)+'"><span>'+sgn(d)+'</span><small>'+pctS(b.o,b.n)+'</small></div></div>'}
   if(b.t==='stack'){
     const bar=b.parts.map(x=>'<i style="background:'+x.c+';flex:'+x.v+' 0 0"></i>').join('');
-    const rows=b.parts.map(x=>'<div class="stk-r"><s style="background:'+x.c+'"></s><span>'+x.l+'</span><span class="a">'+money(x.v)+'</span><span class="p">'+(x.v/b.total*100).toFixed(1)+'%</span></div>').join('');
+    const rows=b.parts.map(x=>'<div class="stk-r"><s style="background:'+x.c+'"></s><span>'+x.l+'</span><span class="a">'+money(x.v)+'</span></div>').join('');
     return '<div class="stk"><div class="stk-h"><span>'+b.l+'</span><b>'+money(b.total)+'</b></div><div class="stk-bar">'+bar+'</div><div class="stk-l">'+rows+'</div></div>'}
   if(b.t==='note')return '<p class="note">'+b.text+'</p>';
   return ''}
