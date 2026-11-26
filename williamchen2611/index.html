@@ -280,14 +280,13 @@ liuxu:{
      {v:{img:'K',dw:2000,dh:106,label:'11/19',when:'卖出 TSLA 记录'},s:{r:[0,-44,2000,110],hl:[{b:[40,44,172,80],tag:'日期'},{b:[1290,40,1360,82],tag:'股数'},{b:[1385,40,1500,82],tag:'成交价'},{b:[1720,40,1855,82],tag:'卖出所得'}]}},
      {v:{img:'G',dw:2000,dh:1053,label:'11/25',when:'期末现金余额'},s:{r:[0,0,2000,1053],hl:[{b:[260,248,408,318],tag:'现金'},{b:[1572,12,1810,38],tag:'日期'}]}}],
     blocks:[
-      {t:'sect',ref:true,h:'10/07 余额的来历（8/18–10/07，仅作说明，不参与本期计算）',items:[
+      {t:'sect',ref:true,h:'',items:[
       tbl(null,[
         ['8/18 期初现金',money(1475717.43)],
         ['10/06 Coco 入金',1250190],
-        ['股息和利息（8/18–10/06）',1379.85],
-        ['期权盈利（8/18–10/06，10/06 已全部平仓）',141201.54],
+        ['期权盈利（8/18–10/06，10/06 已全部平仓）',142582],
         ['10/07 W 现金分配',-142582]],
-        ['10/07 W 现金分配后余额',money(1475717.43+1250190+1379.85+141201.54-142582)])]},
+        ['10/07 W 现金分配后余额',money(2725906.82)])]},
       {t:'sect',h:'10/07–11/25 期权盈利',items:[
       tbl(null,[
         ['10/07 W 现金分配后余额',money(2725906.82)],
@@ -465,7 +464,7 @@ function renderBlock(b){
     const bar=b.parts.map(x=>'<i style="background:'+x.c+';flex:'+x.v+' 0 0"></i>').join('');
     const rows=b.parts.map(x=>'<div class="stk-r"><s style="background:'+x.c+'"></s><span>'+x.l+'</span><span class="a">'+money(x.v)+'</span></div>').join('');
     return '<div class="stk"><div class="stk-h"><span>'+b.l+'</span><b>'+money(b.total)+'</b></div><div class="stk-bar">'+bar+'</div><div class="stk-l">'+rows+'</div></div>'}
-  if(b.t==='sect')return '<div class="sect'+(b.ref?' ref':'')+'"><h3 class="sect-h">'+b.h+'</h3>'+b.items.map(renderBlock).join('')+'</div>';
+  if(b.t==='sect')return '<div class="sect'+(b.ref?' ref':'')+'">'+(b.h?'<h3 class="sect-h">'+b.h+'</h3>':'')+b.items.map(renderBlock).join('')+'</div>';
   if(b.t==='leadbox')return '<p class="lead">'+b.text+'</p>';
   if(b.t==='note')return '<p class="note">'+b.text+'</p>';
   return ''}
