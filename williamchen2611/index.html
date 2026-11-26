@@ -211,6 +211,7 @@ h1 .num,h2 .num{font-size:1.08em}
 .stk-r s{width:12px;height:12px;border-radius:3px;display:block}
 .stk-r .a{font:600 13px var(--f-num);text-align:right}
 .stk-r .p{font:500 12px var(--f-num);color:var(--ink2);text-align:right;min-width:48px}
+.tnum{white-space:nowrap}.tnum i{font-style:normal;display:inline-block;text-align:center;width:.56em}.tnum i.p{width:.22em}
 </style>
 
 <div class="wrap">
@@ -498,6 +499,11 @@ let rt;window.addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>
 })();
 
 /* numbers use Do Hyeon everywhere */
+function tabify(root){
+  root.querySelectorAll('td:not(:first-child) .num:not(.tnum),.bar-row .v .num:not(.tnum)').forEach(el=>{
+    el.classList.add('tnum');
+    el.innerHTML=[...el.textContent].map(ch=>'<i'+(ch===','||ch==='.'?' class="p"':'')+'>'+ch+'</i>').join('')})
+}
 function numify(root){
   const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>(n.parentElement.closest('.num,script,style')||!/\d/.test(n.nodeValue))?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT});
   const list=[];while(w.nextNode())list.push(w.currentNode);
@@ -507,6 +513,6 @@ function numify(root){
       if(i%2){const s=document.createElement('span');s.className='num';s.textContent=t;f.appendChild(s)}else if(t)f.appendChild(document.createTextNode(t))});
     n.replaceWith(f)})
 }
-const mo=new MutationObserver(()=>{mo.disconnect();numify(document.body);mo.observe(document.body,{childList:true,subtree:true})});
-mo.observe(document.body,{childList:true,subtree:true});numify(document.body);
+const mo=new MutationObserver(()=>{mo.disconnect();numify(document.body);tabify(document.body);mo.observe(document.body,{childList:true,subtree:true})});
+mo.observe(document.body,{childList:true,subtree:true});numify(document.body);tabify(document.body);
 </script>
