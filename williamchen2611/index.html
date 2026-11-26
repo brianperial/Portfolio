@@ -270,7 +270,7 @@ liuxu:{
   steps:[
    {tab:'期权总结',eyebrow:'Options',
     title:'期权所得 '+money(507562.46),
-    lead:'从 8/18 开始做期权，当时现金余额为 $1,475,717.43。期间 10/06 入金 $1,250,190.00，10/07 出金 $142,582.00，11/18 和 11/19 买卖股票净得现金 $96,838.86，另有股息和利息 $1,765.32。<mark class="hi">11/25 现金余额为 $3,189,492.07，多出来的 $507,562.46 都是期权所得。</mark>',
+    lead:'',
     full:true,
     shots:[
      {v:{img:'C',dw:2576,dh:1224,label:'8/18',when:'期初现金余额'},s:{r:[0,0,2576,1224],hl:[{b:[286,285,458,362],tag:'现金'},{b:[2075,12,2350,40],tag:'日期'}]}},
@@ -278,12 +278,7 @@ liuxu:{
      {v:{img:'J',dw:2000,dh:236,label:'10/07',when:'出金记录'},s:{r:[0,-44,2000,236],hl:[{b:[12,28,145,64],tag:'日期'},{b:[1680,25,1838,65],tag:'出金'}]}},
      {v:{img:'K',dw:2000,dh:106,label:'11/19',when:'卖出 TSLA 记录'},s:{r:[0,-44,2000,110],hl:[{b:[40,44,172,80],tag:'日期'},{b:[1290,40,1360,82],tag:'股数'},{b:[1385,40,1500,82],tag:'成交价'},{b:[1720,40,1855,82],tag:'卖出所得'}]}},
      {v:{img:'G',dw:2000,dh:1053,label:'11/25',when:'期末现金余额'},s:{r:[0,0,2000,1053],hl:[{b:[260,248,408,318],tag:'现金'},{b:[1572,12,1810,38],tag:'日期'}]}}],
-    blocks:[{t:'stack',l:'11/25 现金余额',total:3189492.07,parts:[
-       {l:'8/18 期初现金',v:1475717.43,c:'#CFC6AE'},
-       {l:'净入金（入金 − 出金）',v:1250190-142582,c:'#B98A1E'},
-       {l:'股票买卖净得',v:96838.86,c:'#8E909A'},
-       {l:'股息和利息',v:1765.32,c:'#6A6B73'},
-       {l:'期权所得',v:507562.46,c:'#2F7D50'}]},
+    blocks:[{t:'leadbox',text:'从 8/18 开始做期权，当时现金余额为 $1,475,717.43。期间 10/06 入金 $1,250,190.00，10/07 出金 $142,582.00，11/18 和 11/19 买卖股票净得现金 $96,838.86，另有股息和利息 $1,765.32。<mark class="hi">11/25 现金余额为 $3,189,492.07，多出来的 $507,562.46 都是期权所得。</mark>'},
       tbl(null,[
         ['8/18 期初现金',money(1475717.43)],
         ['10/06 入金',1250190],
@@ -460,6 +455,7 @@ function renderBlock(b){
     const bar=b.parts.map(x=>'<i style="background:'+x.c+';flex:'+x.v+' 0 0"></i>').join('');
     const rows=b.parts.map(x=>'<div class="stk-r"><s style="background:'+x.c+'"></s><span>'+x.l+'</span><span class="a">'+money(x.v)+'</span></div>').join('');
     return '<div class="stk"><div class="stk-h"><span>'+b.l+'</span><b>'+money(b.total)+'</b></div><div class="stk-bar">'+bar+'</div><div class="stk-l">'+rows+'</div></div>'}
+  if(b.t==='leadbox')return '<p class="lead">'+b.text+'</p>';
   if(b.t==='note')return '<p class="note">'+b.text+'</p>';
   return ''}
 
@@ -473,7 +469,7 @@ function render(animate){
   panes.forEach((P,i)=>{if(sh[i])place(i,sh[i].v,sh[i].s);else{P.el.hidden=true;cur[i]=null}});
   const pos=S.title;
   $('#panel').className='panel'+(S.wide?' full':'');
-  $('#panel').innerHTML='<div class="p-head"><h2>'+S.title+'</h2><p class="lead">'+S.lead+'</p></div><div class="'+(S.wide?'p-wide':'p-body')+'">'+S.blocks.map(renderBlock).join('')+'</div>';
+  $('#panel').innerHTML='<div class="p-head"><h2>'+S.title+'</h2>'+(S.lead?'<p class="lead">'+S.lead+'</p>':'')+'</div><div class="'+(S.wide?'p-wide':'p-body')+'">'+S.blocks.map(renderBlock).join('')+'</div>';
   $('#count').textContent=(step+1)+' / '+A.steps.length;
   $('#prev').disabled=step===0;
   const last=step===A.steps.length-1;
