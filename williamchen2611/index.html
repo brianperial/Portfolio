@@ -211,7 +211,7 @@ h1 .num,h2 .num{font-size:1.08em}
 .stk-r s{width:12px;height:12px;border-radius:3px;display:block}
 .stk-r .a{font:600 13px var(--f-num);text-align:right}
 .stk-r .p{font:500 12px var(--f-num);color:var(--ink2);text-align:right;min-width:48px}
-.tnum{white-space:nowrap}.tnum i{font-style:normal;display:inline-block;text-align:center;width:.56em}.tnum i.p{width:.22em}
+.grid-t tr.sold td,.grid-t tr.sold td:first-child{background:#EEEADF;color:var(--ink2)}.grid-t tr.sold .pill{opacity:.75}.grid-t tr.sec.sold-h td{background:#EEEADF;color:var(--ink2)}.tnum{white-space:nowrap}.tnum i{font-style:normal;display:inline-block;text-align:center;width:.56em}.tnum i.p{width:.22em}
 </style>
 
 <div class="wrap">
@@ -270,26 +270,22 @@ liuxu:{
     now:{img:'G',dw:2000,dh:1053,label:'期末',when:'11/25 12:45 PM ET'}},
   steps:[
    {tab:'期权总结',eyebrow:'Options',
-    title:'期权所得 '+money(507562.46),
+    title:'10/07–11/25 期权盈利 '+money(366360.92),
     lead:'',
     full:true,
     shots:[
-     {v:{img:'C',dw:2576,dh:1224,label:'8/18',when:'期初现金余额'},s:{r:[0,0,2576,1224],hl:[{b:[286,285,458,362],tag:'现金'},{b:[2075,12,2350,40],tag:'日期'}]}},
-     {v:{img:'I',dw:2000,dh:107,label:'10/06',when:'Coco 入金记录'},s:{r:[0,-44,2000,111],hl:[{b:[18,44,150,78],tag:'日期'},{b:[1670,40,1840,80],tag:'入金'}]}},
      {v:{img:'J',dw:2000,dh:236,label:'10/07',when:'W 现金分配记录'},s:{r:[0,-44,2000,236],hl:[{b:[12,28,145,64],tag:'日期'},{b:[1680,25,1838,65],tag:'现金分配'}]}},
      {v:{img:'K',dw:2000,dh:106,label:'11/19',when:'卖出 TSLA 记录'},s:{r:[0,-44,2000,110],hl:[{b:[40,44,172,80],tag:'日期'},{b:[1290,40,1360,82],tag:'股数'},{b:[1385,40,1500,82],tag:'成交价'},{b:[1720,40,1855,82],tag:'卖出所得'}]}},
      {v:{img:'G',dw:2000,dh:1053,label:'11/25',when:'期末现金余额'},s:{r:[0,0,2000,1053],hl:[{b:[260,248,408,318],tag:'现金'},{b:[1572,12,1810,38],tag:'日期'}]}}],
     blocks:[
       tbl(null,[
-        ['8/18 期初现金',money(1475717.43)],
-        ['10/06 Coco 入金',1250190],
-        ['10/07 W 现金分配',-142582],
+        ['10/07 W 现金分配后余额',money(2725906.82)],
         ['11/18 股票调仓（卖出 SIRI、CVX、BABA、VEA，买入 NVDA）',93.12],
         ['11/19 卖出 TSLA 254 股',96745.74],
-        ['股息和利息',1765.32],
-        sub(['非期权账户余额',money(1475717.43+1250190-142582+93.12+96745.74+1765.32)]),
+        ['股息和利息',385.47],
+        sub(['非期权账户余额',money(2725906.82+93.12+96745.74+385.47)]),
         ['11/25 现金余额',money(3189492.07)]],
-        ['期权所得（11/25 现金余额 − 非期权账户余额）',3189492.07-(1475717.43+1250190-142582+93.12+96745.74+1765.32)])]},
+        ['期权盈利（11/25 现金余额 − 非期权账户余额）',3189492.07-(2725906.82+93.12+96745.74+385.47)])]},
    {tab:'股权单周期',eyebrow:'Equities · ETFs',
     title:'股票和 ETF：本期减少 '+money(95478.52),
     lead:'10/30 到 11/25 之间调整了持仓：11/18 卖出 SIRI、CVX、BABA 和 VEA，买入 NVDA；11/19 卖出 254 股 TSLA。每个持仓的期间盈亏 = 期末市值 + 买卖现金 − 期初市值。',
@@ -297,15 +293,15 @@ liuxu:{
     old:{r:[0,0,2000,1047],hl:[{b:[440,532,490,674],tag:'股数',k:'keep'},{b:[536,532,626,674],tag:'价格'},{b:[440,770,490,822],k:'keep'},{b:[536,770,626,822]},{b:[1568,10,1810,36],tag:'日期'}]},
     now:{r:[0,0,2000,1053],hl:[{b:[420,533,502,620],tag:'股数',k:'keep'},{b:[540,533,636,620],tag:'价格'},{b:[420,712,502,740],k:'keep'},{b:[540,712,636,740]},{b:[1572,12,1810,38],tag:'日期'}]},
     wide:true,
-    blocks:[{t:'grid',mode:'trade',rows:[
+    blocks:[{t:'grid',mode:'trade',soldLabel:'已卖出（11/18 全部卖出，不再持有）',rows:[
       {t:'TSLA',note:'11/19 卖出 254 股',s0:1235,s1:981,p0:394.96,p1:368.5301,v0:487775.60,v1:361528.03,cf:96745.74},
       {t:'NVDA',note:'11/18 买入',s0:0,s1:1809.9176,p0:0,p1:144.62,v0:0,v1:261750.28,cf:-274835.99},
       {t:'HOOD',s0:1000,s1:1000,p0:82.59,p1:63.7662,v0:82590,v1:63766.20,cf:0},
       {t:'GLD',s0:500,s1:500,p0:355.53,p1:321.30,v0:177765,v1:160650,cf:0},
-      {t:'SIRI',note:'11/18 全部卖出',s0:1500,s1:0,p0:28.67,p1:32.68,v0:43005,v1:0,cf:49018.99},
-      {t:'CVX',note:'11/18 全部卖出',s0:500,s1:0,p0:234.72,p1:206.1513,v0:117360,v1:0,cf:103073.53},
-      {t:'BABA',note:'11/18 全部卖出',s0:500,s1:0,p0:97.65,p1:85.61,v0:48825,v1:0,cf:42804.12},
-      {t:'VEA',note:'11/18 全部卖出',s0:1200,s1:0,p0:69.005,p1:66.6951,v0:82806,v1:0,cf:80032.47}],
+      {t:'SIRI',s0:1500,s1:0,p0:28.67,p1:32.68,v0:43005,v1:0,cf:49018.99},
+      {t:'CVX',s0:500,s1:0,p0:234.72,p1:206.1513,v0:117360,v1:0,cf:103073.53},
+      {t:'BABA',s0:500,s1:0,p0:97.65,p1:85.61,v0:48825,v1:0,cf:42804.12},
+      {t:'VEA',s0:1200,s1:0,p0:69.005,p1:66.6951,v0:82806,v1:0,cf:80032.47}],
       total:{v0:779519.46+260561.00,v1:687113.08+160650.00,cf:96838.86}}]},
    {tab:'股权全周期',eyebrow:'Since purchase',
     title:'相对买入成本：累计亏损 '+money(952463.88-847763.08),
@@ -428,11 +424,12 @@ function renderBlock(b){
   if(b.t==='grid'&&b.mode==='trade'){
     const dash='<span class="mut">—</span>';
     const sh=n=>n?num(n):dash,mv=n=>n?money(n):dash;
-    const row=r=>{const g=r.v1+r.cf-r.v0;return '<tr><td>'+r.t+(r.note?'<small>'+r.note+'</small>':'')+'</td><td class="mut">'+sh(r.s0)+'</td><td>'+sh(r.s1)+'</td><td class="mut">'+(r.p0?px(r.p0):dash)+'</td><td>'+px(r.p1)+(r.s1?'':'<small>卖出价</small>')+'</td><td class="mut">'+mv(r.v0)+'</td><td>'+mv(r.v1)+'</td><td class="'+cls(r.cf)+'">'+(r.cf?sgn(r.cf):dash)+'</td><td><span class="pill '+(g<0?'n':'')+'">'+sgn(g)+'</span></td></tr>'};
+    const row=r=>{const g=r.v1+r.cf-r.v0;return '<tr'+(r.s1?'':' class="sold"')+'><td>'+r.t+(r.note?'<small>'+r.note+'</small>':'')+'</td><td class="mut">'+sh(r.s0)+'</td><td>'+sh(r.s1)+'</td><td class="mut">'+(r.p0?px(r.p0):dash)+'</td><td>'+px(r.p1)+(r.s1?'':'<small>卖出价</small>')+'</td><td class="mut">'+mv(r.v0)+'</td><td>'+mv(r.v1)+'</td><td class="'+cls(r.cf)+'">'+(r.cf?sgn(r.cf):dash)+'</td><td><span class="pill '+(g<0?'n':'')+'">'+sgn(g)+'</span></td></tr>'};
     const T=b.total,tg=T.v1+T.cf-T.v0;
     const head='<tr><th>持仓</th><th>股数 · 期初</th><th>股数 · 期末</th><th>价格 · 期初</th><th>价格 · 期末</th><th>市值 · 期初</th><th>市值 · 期末</th><th>买卖现金</th><th>期间盈亏</th></tr>';
     const tot='<tr class="tot"><td>合计</td><td></td><td></td><td></td><td></td><td class="mut">'+money(T.v0)+'</td><td>'+money(T.v1)+'</td><td class="'+cls(T.cf)+'">'+sgn(T.cf)+'</td><td class="'+cls(tg)+'">'+sgn(tg)+'</td></tr>';
-    return '<div class="gwrap"><table class="grid-t">'+head+b.rows.map(row).join('')+tot+'</table></div>'}
+    const held=b.rows.filter(r=>r.s1),sold=b.rows.filter(r=>!r.s1);
+    return '<div class="gwrap"><table class="grid-t">'+head+held.map(row).join('')+(sold.length?'<tr class="sec sold-h"><td colspan="9">'+(b.soldLabel||'已卖出')+'</td></tr>'+sold.map(row).join(''):'')+tot+'</table></div>'}
   if(b.t==='grid'&&b.mode==='cost'){
     const pcs=v=>(v<0?MINUS:'+')+Math.abs(v*100).toFixed(2)+'%';
     const row=r=>{const d=r.p1-r.c,pl=r.v1-r.cb;return '<tr><td>'+r.t+'</td><td class="mut">'+num(r.sh)+'</td><td class="mut">'+px(r.c)+'</td><td>'+px(r.p1)+'</td><td class="'+cls(d)+'">'+(d<0?MINUS:'+')+'$'+Math.abs(d).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:3})+'</td><td class="'+cls(pl)+'">'+pcs(pl/r.cb)+'</td><td class="mut">'+money(r.cb)+'</td><td>'+money(r.v1)+'</td><td><span class="pill '+(pl<0?'n':'')+'">'+sgn(pl)+'</span></td></tr>'};
